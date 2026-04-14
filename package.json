@@ -1,0 +1,88 @@
+{
+  "name": "izuna-book-reader",
+  "displayName": "阅读3.0服务器版",
+  "description": "阅读3.0服务器版vscode插件",
+  "version": "0.0.1",
+  "license": "GPL-3.0",
+  "icon": "public/ic_launcher.png",
+  "publisher": "izuna",
+  "engines": {
+    "vscode": "^1.102.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "izuna-book-reader.openBookshelf",
+        "title": "打开书架"
+      },
+      {
+        "command": "izuna-book-reader.startBackend",
+        "title": "启动后端"
+      },
+      {
+        "command": "izuna-book-reader.stopBackend",
+        "title": "关闭后端"
+      },
+      {
+        "command": "izuna-book-reader.setBackendPath",
+        "title": "设置后端地址"
+      }
+    ],
+    "configuration": {
+      "title": "阅读3.0服务器配置",
+      "properties": {
+        "izuna-book-reader.backendPath": {
+          "type": "string",
+          "default": "",
+          "description": "后端文件所在地址"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "izuna-book-reader-sidebar",
+          "title": "阅读3.0",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "izuna-book-reader-sidebar": [
+        {
+          "id": "izuna-book-reader-view",
+          "name": "控制面板"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.102.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.52.0",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3",
+    "ts-loader": "^9.5.4",
+    "webpack": "^5.104.1",
+    "webpack-cli": "^6.0.1",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
